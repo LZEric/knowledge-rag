@@ -50,20 +50,22 @@ class PipelineConfig:
 @dataclass
 class RunConfig:
     # 运行流程参数配置
-    use_serialized_tables: bool = False
-    parent_document_retrieval: bool = False
-    use_vector_dbs: bool = True
-    use_bm25_db: bool = False
-    llm_reranking: bool = False
-    llm_reranking_sample_size: int = 30
-    top_n_retrieval: int = 10
+    use_serialized_tables: bool = False # 是否使用序列化表
+    parent_document_retrieval: bool = False # 是否使用父文档检索
+    use_vector_dbs: bool = True # 是否使用向量数据库
+    use_bm25_db: bool = False # 是否使用BM25数据库
+    llm_reranking: bool = False # 是否使用LLM重排序
+    llm_reranking_sample_size: int = 30 # LLM重排序样本大小
+    top_n_retrieval: int = 10 # top-n检索数量
     parallel_requests: int = 1 # 并行的数量，需要限制，否则qwen-turbo会超出阈值
-    pipeline_details: str = ""
-    submission_file: bool = True
-    full_context: bool = False
+    team_email: str = "79250515615@yandex.com"
+    submission_name: str = "Ilia_Ris vDB + SO CoT" # 提交名称
+    pipeline_details: str = "向量数据库 + BM25数据库 + LLM重排序" # 管道详情
+    submission_file: bool = True # 是否提交文件
+    full_context: bool = False # 是否使用全上下文
     api_provider: str = "dashscope" #openai
     answering_model: str = "qwen-turbo-latest" # gpt-4o-mini-2024-07-18 or "gpt-4o-2024-08-06"
-    config_suffix: str = ""
+    config_suffix: str = "" # 配置后缀，用于区分不同运行实例
 
 class Pipeline:
     def __init__(self, root_path: Path, subset_name: str = "subset.csv", questions_file_name: str = "questions.json", pdf_reports_dir_name: str = "pdf_reports", run_config: RunConfig = RunConfig()):
